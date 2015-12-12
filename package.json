@@ -1,0 +1,30 @@
+{
+  "name": "bufferify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainvg/bufferify.git"
+  },
+  "keywords": [
+    "rain",
+    "bufferify"
+  ],
+  "author": "rainvg (https://github.com/rainvg)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rainvg/bufferify/issues"
+  },
+  "homepage": "https://github.com/rainvg/bufferify#readme",
+  "dependencies": {
+    "jsonpack": "^1.1.4"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
+}
