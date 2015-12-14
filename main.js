@@ -1,6 +1,8 @@
 'use strict';
 
 var jsonpack = require('jsonpack');
+var zlib = require('zlib');
+var clone = require('clone');
 
 function __total_buffers_size(object)
 {
@@ -51,6 +53,7 @@ function __insert_buffers(binary, object)
 
 function pack(object)
 {
+  object = clone(object);
   var binary = new Buffer(__total_buffers_size(object));
   binary.cursor = 0;
 
@@ -61,10 +64,15 @@ function pack(object)
   meta.copy(buffer, 4);
   binary.copy(buffer, 4 + meta.length);
 
+  buffer = zlib.gzipSync(buffer);
+
   return buffer
 }
+
 function unpack(buffer)
 {
+  buffer = zlib.gunzipSync(buffer);
+
   // Add some exception..?
   var meta_length = buffer.readUInt32LE();
   var meta = jsonpack.unpack(buffer.toString("utf8", 4, 4 + meta_length));
