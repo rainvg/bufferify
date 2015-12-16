@@ -7,10 +7,9 @@
     "test": "./node_modules/.bin/mocha test/index.js",
     "lint": "gulp lint",
     "git-add": "git add .",
-    "echo": "echo",
     "git-commit": "git commit -m",
-    "git-push": "git push origin master",
-    "deploy": "gulp"
+    "commit": "gulp && npm run git-add && npm run git-commit",
+    "push": "git push origin master"
   },
   "repository": {
     "type": "git",
