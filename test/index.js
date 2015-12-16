@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 var zlib = require('zlib');
-var bufferify = require('../main');
+var bufferify = require('../src/main');
 
 describe('bufferify', function ()
 {

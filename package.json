@@ -2,9 +2,15 @@
   "name": "bufferify",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "dist/main.min.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/index.js"
+    "test": "./node_modules/.bin/mocha test/index.js",
+    "lint": "gulp lint",
+    "git-add": "git add .",
+    "echo": "echo",
+    "git-commit": "git commit -m",
+    "git-push": "git push origin master",
+    "deploy": "gulp"
   },
   "repository": {
     "type": "git",
@@ -26,6 +32,13 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0",
     "mocha": "^2.3.4"
   }
 }
