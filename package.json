@@ -2,7 +2,7 @@
   "name": "bufferify",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.min.js",
+  "main": "dist/index.min.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha test/index.js",
     "lint": "gulp lint",
