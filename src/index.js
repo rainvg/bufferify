@@ -8,7 +8,7 @@ function __total_buffers_size(object)
   if(object instanceof Buffer)
     return object.length;
 
-  if(typeof object === "string")
+  if(typeof object === 'string')
     return 0;
 
   var size = 0;
@@ -26,13 +26,13 @@ function __extract_buffers(binary, object)
   {
     object.copy(binary, binary.cursor);
 
-    var meta = {"type": "__bufferify_placeholder__", "offset": binary.cursor, "length": object.length};
+    var meta = {type: '__bufferify_placeholder__', offset: binary.cursor, length: object.length};
     binary.cursor += object.length;
 
     return meta;
   }
 
-  if(typeof object === "string")
+  if(typeof object === 'string')
     return object;
 
   for(var i in object)
@@ -44,13 +44,13 @@ function __extract_buffers(binary, object)
 function __insert_buffers(binary, object)
 {
   'use strict';
-  if(object && object.type === "__bufferify_placeholder__")
+  if(object && object.type === '__bufferify_placeholder__')
   {
     if(!Number.isInteger(object.offset) || !Number.isInteger(object.length))
-      throw {'code': 4, 'description': 'Placeholder corrupted', 'url': ''};
+      throw {code: 4, description: 'Placeholder corrupted', url: ''};
 
     if(binary.length < object.offset + object.length)
-      throw {'code': 5, 'description': 'Placeholder references data beyond end of buffer', 'url': ''};
+      throw {code: 5, description: 'Placeholder references data beyond end of buffer', url: ''};
 
     var buffer = new Buffer(object.length);
     binary.copy(buffer, 0, object.offset, object.offset + object.length);
@@ -58,7 +58,7 @@ function __insert_buffers(binary, object)
     return buffer;
   }
 
-  if(typeof object === "string")
+  if(typeof object === 'string')
     return object;
 
   for(var i in object)
@@ -95,26 +95,26 @@ function unpack(buffer)
   }
   catch (error)
   {
-    throw {'code': 0, 'description': 'Gunzip failed', 'url': ''};
+    throw {code: 0, description: 'Gunzip failed', url: ''};
   }
 
   if(buffer.length < 4)
-    throw {'code': 1, 'description': 'Buffer should be at least 4 bytes long', 'url': ''};
+    throw {code: 1, description: 'Buffer should be at least 4 bytes long', url: ''};
 
   // Add some exception..?
   var meta_length = buffer.readUInt32LE();
 
   if(buffer.length < meta_length + 4)
-    throw {'code': 2, 'description': 'Meta data is shorter than declared', 'url': ''};
+    throw {code: 2, description: 'Meta data is shorter than declared', url: ''};
 
   var meta;
   try
   {
-    meta = jsonpack.unpack(buffer.toString("utf8", 4, 4 + meta_length));
+    meta = jsonpack.unpack(buffer.toString('utf8', 4, 4 + meta_length));
   }
   catch (error)
   {
-    throw {'code': 3, 'description': 'Meta is corrupted', 'url': ''};
+    throw {code: 3, description: 'Meta is corrupted', url: ''};
   }
 
   var binary = new Buffer(buffer.length - meta_length - 4);
