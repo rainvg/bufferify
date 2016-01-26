@@ -47,10 +47,10 @@ function __insert_buffers(binary, object)
   if(object && object.type === '__bufferify_placeholder__')
   {
     if(!Number.isInteger(object.offset) || !Number.isInteger(object.length))
-      throw {code: 4, description: 'Placeholder corrupted', url: ''};
+      throw {code: 4, description: 'Placeholder corrupted.', url: ''};
 
     if(binary.length < object.offset + object.length)
-      throw {code: 5, description: 'Placeholder references data beyond end of buffer', url: ''};
+      throw {code: 5, description: 'Placeholder references data beyond end of buffer.', url: ''};
 
     var buffer = new Buffer(object.length);
     binary.copy(buffer, 0, object.offset, object.offset + object.length);
@@ -95,17 +95,17 @@ function unpack(buffer)
   }
   catch (error)
   {
-    throw {code: 0, description: 'Gunzip failed', url: ''};
+    throw {code: 0, description: 'Gunzip failed.', url: ''};
   }
 
   if(buffer.length < 4)
-    throw {code: 1, description: 'Buffer should be at least 4 bytes long', url: ''};
+    throw {code: 1, description: 'Buffer should be at least 4 bytes long.', url: ''};
 
   // Add some exception..?
   var meta_length = buffer.readUInt32LE();
 
   if(buffer.length < meta_length + 4)
-    throw {code: 2, description: 'Meta data is shorter than declared', url: ''};
+    throw {code: 2, description: 'Meta data is shorter than declared.', url: ''};
 
   var meta;
   try
@@ -114,7 +114,7 @@ function unpack(buffer)
   }
   catch (error)
   {
-    throw {code: 3, description: 'Meta is corrupted', url: ''};
+    throw {code: 3, description: 'Meta is corrupted.', url: ''};
   }
 
   var binary = new Buffer(buffer.length - meta_length - 4);
